@@ -1,6 +1,7 @@
 
 # Hyprland dotfiles
-
+   Distro: Arch Linux<br>
+   Theme: Gruvbox
 ## Programs I use:
     - Browser: Librewolf -  A web browser and an independent fork of Firefox, which aims to be more private and secure than Firefox.
     - Text editor: Neovim  - A fork of Vim that strives to improve the extensibility and maintainability of Vim.
@@ -17,3 +18,5 @@
     - Wallpaper Daemon: swww - Features live switching, awesome animations, and GIF support
     - Fetch Scripts: Neofetch, Pfetch, Nitch
     - Display Manager: GDM - GNOME Display Manager is a display manager for the windowing systems X11 and Wayland.
+    
+  
