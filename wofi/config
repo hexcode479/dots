@@ -1,0 +1,9 @@
+mode=drun
+insensitive=true
+prompt=
+width=800
+height=450
+term=footclient
+hide_scroll=true
+location=0
+allow_images=false

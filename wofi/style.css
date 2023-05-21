@@ -1,0 +1,48 @@
+* {
+  font-family: NotoMono Nerd Font;
+}
+
+window {
+  margin: 0px;
+  opacity: 0.90;
+}
+
+#input {
+  margin: 0px 2px 2px 2px;
+  background-color: #000000;
+  color: #ffffff;
+  padding: 2px;
+  border-radius: 0px;
+}
+
+#inner-box {
+  margin: 5px;
+  background-color: #000000;
+  padding: 5px;
+}
+
+#outer-box {
+  margin: 1px;
+  padding: 15px;
+  background-color: #000000;
+  border-radius: 0px;
+}
+
+#text {
+  margin: 5px;
+  color: #ffffff;
+}
+
+#entry:selected {
+  background-color: #000000;
+  border: 1px solid #ffffff;  
+  border-radius: 0px;
+  padding: 2px;
+  color: #000000;
+}
+
+#text:selected {
+  background-color: #000000;
+  color: #000000;
+}
+

@@ -1,0 +1,82 @@
+{
+    "position": "top", 
+    "layer": "top", 
+    "modules-left": ["custom/launcher","wlr/workspaces", "tray"],
+    "modules-center": ["hyprland/window"],
+    "modules-right": ["custom/updates-pacman-aur", "network", "pulseaudio", "clock", "custom/power"],
+    "margin-top": 10,
+    "margin-left": 10,
+    "margin-right": 10,
+    "margin-bottom": 0,
+
+
+
+    // Modules configuration
+    "wlr/workspaces": {
+	"all-outputs": true,
+        "sort-by-number": true,
+        "format": "{icon}",
+        "on-click": "activate",
+        "format-icons": {
+            "default": "<span background='#282828'></span>",
+            "urgent": "",
+            "active": ""
+         },
+        "on-scroll-up": "hyprctl dispatch workspace e-1",
+        "on-scroll-down": "hyprctl dispatch workspace e+1"
+    },
+    "custom/launcher":{
+        "format": ""
+        //"on-click": "do something..."
+    },
+    "custom/power":{
+        "format": "",
+        "on-click": "~/scripts/wofi-power-menu"
+    },
+    "custom/updates-pacman-aur":{
+        "exec-on-event": true,
+        "format": "<span foreground='#b8bb26'></span> {}",
+        "exec" : "$HOME/.config/waybar/scripts/updates-pacman-aur.sh",
+        "interval": 300,
+        "on-click": "footclient sudo pacman -Syu",
+        "on-click-right": "footclient sudo paru -Syu"
+    },
+    "custom/media": {
+        "format": "{icon} {}",
+        "return-type": "json",
+        "max-length": 40,
+        "format-icons": {
+            "spotify": "<span foreground='#46c880'> </span>",
+            "default": "<span foreground='#8cb6ff'> </span>"
+        },
+        "escape": true,
+        "exec": "$HOME/.config/waybar/scripts/mediaplayer.py 2> /dev/null",
+        // "exec": "$HOME/.config/waybar/scripts/mediaplayer.py --player spotify 2> /dev/null", // Filter player based on name
+        "on-click": "playerctl play-pause",
+        "on-click-right": "playerctl next",
+        "on-click-middle": "playerctl previous"
+    },
+    "clock": {
+	"format": "<span foreground='#d79921'> </span>{:%I:%M %p}",
+        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+	},
+    "pulseaudio": {
+	"on-click": "pactl set-sink-mute @DEFAULT_SINK@ toggle",
+	"on-click-right": "pavucontrol",
+	"format": "<span size='13000' foreground='#d79921'>{icon}</span> {volume}%",
+        "format-muted": "<span size='14000' foreground='#d79921'></span> Muted",
+        "format-icons": {
+            "headphone": "",
+            "hands-free": "",
+            "headset": "",
+            "phone": "",
+            "portable": "",
+            "car": "",
+            "default": ["", ""]
+        }
+    },
+    "tray": {
+        "icon-size": 16,
+        "spacing": 10
+    }
+}

@@ -1,0 +1,73 @@
+{
+    "layer": "top", // Waybar at top layer
+    // "position": "bottom", // Waybar position (top|bottom|left|right)
+    // "height": 55,  // Waybar height (to be removed for auto height)
+    // "width": , // Waybar width
+    "spacing": 7.5, // Gaps between modules (4px)
+    // Choose the order of the modules
+    "modules-left": ["custom/launcher", "custom/updates-pacman-aur", "tray"],
+    "modules-center": ["hyprland/window"],
+    "modules-right": ["pulseaudio", "clock", "custom/power"],
+
+    // Modules configuration
+    "wlr/workspaces": {
+	"all-outputs": true,
+        "sort-by-number": true,
+        "format": "{icon}",
+        "on-click": "activate"
+        // "format-icons": {
+        //    "default": "",
+        //    "urgent": "",
+        //    "active": ""
+         },
+        "on-scroll-up": "hyprctl dispatch workspace e-1",
+        "on-scroll-down": "hyprctl dispatch workspace e+1"
+    },
+    "custom/updates-pacman-aur": {
+       "exec-on-event": true,
+        "format": "<span foreground='#8cb6ff'></span> {}",
+        "exec" : "$HOME/.config/waybar/scripts/updates-pacman-aur.sh",
+        "interval": 300,
+        "on-click": "kitty -c .config/kitty/kitty.conf sh -c 'sudo pacman -Syu ; echo Done - Press enter to exit; read _'",
+        "on-click-right": "kitty -c .config/kitty/kitty.conf sh -c 'yay -Sua --sudoloop ; echo Done - Press enter to exit; read _'",
+        "on-click-middle": "kitty -c .config/kitty/kitty.conf sh -c 'yay -Syu --sudoloop ; echo Done - Press enter to exit; read _'"
+    },
+    "custom/power":{
+        "format": "",
+        "on-click": "~/scripts/wofi-power-menu"
+    },
+    "custom/launcher":{
+        "format": ""
+        //"on-click": "do something..."
+    },
+    "clock": {
+        // "timezone": "Europe/London",
+        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+        "format-alt": "{:%Y-%m-%d}"
+    },
+    "cpu": {
+        "format": "{usage}% ",
+        "tooltip": false
+    },
+    "memory": {
+        "format": "{}% "
+    },
+    "tray": {
+        // "icon-size": 21,
+        "spacing": 10
+    },
+    "network": {
+        // "interface": "wlp2*", // (Optional) To force the use of this interface
+        "format-wifi": "{essid} ({signalStrength}%) ",
+        "format-ethernet": "{ipaddr}/{cidr} ",
+        "tooltip-format": "{ifname} via {gwaddr} ",
+        "format-linked": "{ifname} (No IP) ",
+        "format-disconnected": "Disconnected ⚠",
+        "format-alt": "{ifname}: {ipaddr}/{cidr}"
+    },
+        "escape": true,
+        "exec": "$HOME/.config/waybar/mediaplayer.py 2> /dev/null" // Script in resources folder
+        // "exec": "$HOME/.config/waybar/mediaplayer.py --player spotify 2> /dev/null" // Filter player based on name
+    }
+}
+

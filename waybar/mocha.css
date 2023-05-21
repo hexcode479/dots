@@ -1,0 +1,186 @@
+* {
+    /* `otf-font-awesome` is required to be installed for icons */
+    font-family: JetBrains Mono Nerd Font;
+    font-size: 14px;
+    background: #121221;
+}
+
+window#waybar {
+    transition-duration: 5s;
+}
+
+window#waybar.hidden {
+    opacity: 0.2;
+}
+
+/*
+window#waybar.empty {
+    background-color: transparent;
+}
+window#waybar.solo {
+    background-color: #FFFFFF;
+}
+*/
+
+button {
+    /* Use box-shadow instead of border so the text isn't offset */
+    /* Avoid rounded borders under each button name */
+    border: 0;
+    border-radius: 0;
+}
+
+/* https://github.com/Alexays/Waybar/wiki/FAQ#the-workspace-buttons-have-a-strange-hover-effect */
+
+
+#workspaces {
+    border-radius: 15pt;
+    margin: 3px 4px 3px 4px;
+    padding: 5px 15px;
+    background-color: #1E1E2E;
+}
+
+#workspaces button {
+    padding: 0px 4px;
+    color: #CDD6F4;
+    background-color: #1E1E2E;
+}
+
+
+#custom-power {
+    border-radius: 15pt;
+    margin: 3px 15px 3px 4px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    padding-left: 10px;
+    padding-right: 14px; 
+    background-color: #1E1E2E;
+    color: #CDD6F4;
+}
+
+#custom-launcher {
+    border-radius: 15pt;
+    margin: 3px 4px 3px 15px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    padding-left: 10px;
+    padding-right: 15px;
+    background-color: #1E1E2E;
+    color: #CDD6F4;
+}
+#pulseaudio {
+    border-radius: 15pt;
+    margin: 3px 4px 3px 4px;
+    padding: 2px 15px;
+    background-color: #1E1E2E;
+    color: #CDD6F4;
+}
+#clock {
+    border-radius: 15pt;
+    margin: 3px 4px 3px 4px;
+    padding: 2px 15px;
+    background-color: #1E1E2E;
+    color: #CDD6F4;
+}
+
+#cpu {
+    border-radius: 15pt;
+    margin: 3px 4px 3px 4px;
+    padding: 2px 15px;
+    background-color: #1E1E2E;
+    color: #CDD6F4;
+}
+
+#window {
+    border-radius: 15pt;
+    margin: 3px 4px 3px 4px;
+    padding: 2px 15px;
+    background-color: #1E1E2E;
+    color: #CDD6F4;
+
+}
+
+#memory {
+    border-radius: 15pt;
+    margin: 3px 4px 3px 4px; 
+    padding: 2px 15px;
+    background-color: #1E1E2E;
+    color: #CDD6F4;
+}
+
+#network {
+    border-radius: 15pt;
+    margin: 3px 4px 3px 4px; 
+    padding: 2px 15px;
+    background-color: #1E1E2E;
+    color: #CDD6F4;
+}
+
+#tray, #custom-updates-pacman-aur {
+    border-radius: 15pt;
+    margin: 3px 4px 3px 4px;
+    padding: 2px 15px;
+    background-color: #1E1E2E;
+    color: #CDD6F4;
+}
+
+/* If workspaces is the leftmost module, omit left margin */
+/* .modules-left > widget:first-child > #workspaces {
+    margin-left: 0;
+} */
+
+/* If workspaces is the rightmost module, omit right margin */
+/*.modules-right > widget:last-child > #workspaces {
+    margin-right: 0;
+} */
+
+#battery {
+    background-color: #ffffff;
+    color: #000000;
+}
+
+#battery.charging, #battery.plugged {
+    color: #ffffff;
+    background-color: #26A65B;
+}
+
+@keyframes blink {
+    to {
+        background-color: #ffffff;
+        color: #000000;
+    }
+}
+
+#battery.critical:not(.charging) {
+    background-color: #f53c3c;
+    color: #ffffff;
+    animation-name: blink;
+    animation-duration: 0.5s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
+#disk {
+    background-color: #964B00;
+}
+
+#backlight {
+    background-color: #90b1b1;
+}
+
+#network.disconnected {
+    background-color: #f53c3c;
+}
+
+#tray {
+}
+
+#tray > .passive {
+    -gtk-icon-effect: dim;
+}
+
+#tray > .needs-attention {
+    -gtk-icon-effect: highlight;
+    background-color: #eb4d4b;
+}
+

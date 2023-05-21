@@ -1,0 +1,125 @@
+{
+    "layer": "top", // Waybar at top layer
+    "position": "top", // Waybar position (top|bottom|left|right)
+    // "height":40 ,// Waybar height (to be removed for auto height)
+    "margin-top": 0,
+    "margin-right": 0,
+    "margin-bottom": 5,
+    "margin-left": 0,    
+    //"width": 1920, // Waybar width
+    "spacing": 0,
+    "fixed-center": true, 
+    // Choose the order of the modules
+    "modules-left": ["wlr/workspaces", "custom/updates-pacman-aur"],
+    "modules-right": ["cpu","memory","battery","pulseaudio","backlight","network","hyprland/language","custom/cycle_wall","tray"],
+    "modules-center": ["clock","custom/weather"],
+    // Modules configuration
+
+    // custom modules //
+    "custom/cycle_wall":{
+        "format":" ",
+        // "interval": 1,
+        "on-click": "~/scripts/wall",
+        "tooltip": false
+    },
+
+    "custom/updates-pacman-aur": {
+    "exec-on-event": true,
+    "format": "<span>󰏔</span> {}",
+    "exec" : "$HOME/.config/waybar/scripts/updates-pacman-aur.sh",
+    "interval": 300,
+    "on-click": "footclient paru -Syu",
+    "on-click-right": "footclient sudo pacman -Syu"
+    },
+    "custom/weather":{
+    "format": " {}",
+    "tooltip": true,
+    "interval": 3600,
+    "exec": "~/scripts/weather.py",
+    "return-type": "json"
+    },
+    // End of custom modules //
+    "wlr/workspaces": {
+        "format": "{icon}",
+        "format-active": "{icon}",
+        "on-click": "activate"
+        // "format-icons":{
+        //   "10":"10"
+        // }
+    },
+    "tray": {
+        "icon-size": 21,
+        "spacing": 4,
+        "show-passive-items": true,
+        "max-length": 6,
+        "min-length": 6,
+    },
+    "hyprland/language": {
+    "format-en": "US",
+    "format-es": "Es",
+    "format": " {}",
+    "keyboard-name": "rk-keyboard-5.1",
+    "max-length": 5,
+    "min-length": 5,
+    // "on-click": "hyprctl switchxkblayout rk-keyboard-5.1 next"
+    },
+    "clock": {
+        "tooltip": false,
+        "interval": 60,
+       "format": "{:%a - %d - %H:%M}",
+        "max-length": 25,
+        "on-click": "footclient -e calcure"},
+    "cpu": {
+        "interval":1,
+        "format":"{icon0}{icon1}{icon2}{icon3}",
+        "format-icons": ["▁", "▂", "▃", "▄", "▅", "▆", "▇", "█"],
+        "on-click": "footclient -e btop",
+        "max-lenght": 25,
+        "min-length":6,
+    },
+    "memory": {
+        "format":" {percentage}%",
+        "interval": 1,
+        "on-click": "footclient -e btop",
+        "max-lenght": 25,
+        "min-length":6,
+    },
+    "backlight": {
+        // "device": "acpi_video1",
+        "format": "{icon}{percent}%",
+        "format-icons": [" ", " ", " ", " ", " ", " ", " ", " ", " "],
+        "on-scroll-up":"brightnessctl set 30+",
+        "on-scroll-down":"brightnessctl set 30-",
+        "max-lenght": 25,
+        "min-length":6,
+    },
+    "battery": {
+        "states": {
+            "full":100,
+            "warning": 50,
+            "critical": 20
+        },
+        "interval":60,
+        "format": "{icon} {capacity}%",
+        "format-icons": ["", "", "", "", ""]
+    },
+    "network": {
+         "interface": "wlan0",
+        "format-wifi":  " {signalStrength}% ",
+        "format-disconnected": "  睊  ",
+        "tooltip-format": "{ifname} via {gwaddr} ",
+        "tooltip-format-wifi": "{essid} {signalStrength}%",
+        "on-click": "nm-connection-editor"
+    },
+    "pulseaudio": {
+    "format": " {volume}%",
+    "format-bluetooth": "{volume}%",
+    "scroll-step": 1,
+    "on-click-right": "pavucontrol",
+    "ignored-sinks": ["Easy Effects Sink"],
+    "max-lenght": 25,
+    "exec":"pactl --format=json list sinks | jq -cM --unbuffered \"map(select(.name == \\\"$(pactl get-default-sink)\\\"))[0].properties | [.\\\"media.name\\\",.\\\"alsa.name\\\",.\\\"node.nick\\\",.\\\"alsa.long_card_name\\\"] | map(select(length>0))[0] | {text:.}\"",
+    "exec-if": "sleep 0.1", // Give enough time for `pactl get-default-sink` to update
+    "on-click": "pactl --format=json list sinks short | jq -cM --unbuffered \"[.[].name] | .[((index(\\\"$(pactl get-default-sink)\\\")+1)%length)]\" | xargs pactl set-default-sink"
+}
+}
